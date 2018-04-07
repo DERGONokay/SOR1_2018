@@ -1,0 +1,15 @@
+#!/bin/bash
+NAME=$1
+#echo "Parametro = $*"
+if [[ $# -lt 1 ]]; then
+	echo 'Cantidad de parametros invalida'
+	exit 0
+fi
+INSTALADO=`dpkg -l "*$NAME*" &> /dev/null`
+if [[ $? == 0 ]]; then
+	echo 'Programa instalado'
+	exit 0
+fi
+
+echo 'Programa no instalado'
+exit 1
