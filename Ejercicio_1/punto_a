@@ -1,12 +1,26 @@
 #!/bin/bash
 NAME=$1
+A=true
 #echo "Parametro = $*"
 if [[ $# -lt 1 ]]; then
 	echo 'Cantidad de parametros invalida'
 	exit 0
 fi
+if [[ $# -eq 1 ]]; then
+    while $A; do
+	case $1 in
+	man | --help)
+		echo "Preguntenle a Damian como funciona, yo no se nada"
+		exit 0
+		;;
+	*)
+		A=false
+		;;
+	esac
+    done
+fi
 INSTALADO=`dpkg -l "*$NAME*" &> /dev/null`
-if [[ $? == 0 ]]; then
+if dpkg -l "*$NAME*" &> /dev/null; then
 	echo 'Programa instalado'
 	exit 0
 fi

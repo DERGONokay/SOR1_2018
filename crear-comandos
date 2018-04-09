@@ -1,0 +1,16 @@
+#!/bin/bash
+#Prefijo por default /home/usuario
+PREFIX="~/"
+A=true
+echo "$#"
+if [[ $# -gt 0 ]]; then
+	PREFIX=$1
+fi
+#Se crea el link simbolico entre el comando y el script
+echo "Creando comandos..."
+sudo ln -s  $PREFIX/SOR1_2018/Ejercicio_1/punto_a /usr/bin/instalado &> /dev/null
+if [[ $? == 0 ]]; then
+	echo "'instalado' creado"
+else
+	echo "'instalado' no creado"
+fi
