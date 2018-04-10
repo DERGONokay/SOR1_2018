@@ -10,7 +10,13 @@ if [[ $# -eq 1 ]]; then
     while $A; do
 	case $1 in
 	man | --help)
-		echo "Preguntenle a Damian como funciona, yo no se nada"
+		echo "Instalado permite saber si un programa esta instalado o no."
+		echo "Recibe como primer parametro el nombre del programa que sedesea conocer si está o no instalado."
+		echo "------------------------------------------------------------"
+		echo "Syntaxys"
+		echo "instalado <NOMBRE_DEL_PROGRAMA>	Imprime por consola 'Programa instalado'  y retora 0"
+		echo "instalado man		Muestra este manual"
+		echo "instalado --help	Muestra este manual"
 		exit 0
 		;;
 	*)

@@ -1,14 +1,19 @@
 #!/bin/bash
 #Prefijo por default /home/usuario
-PREFIX="~/"
-A=true
-echo "$#"
+PREFIX="~"
+
 if [[ $# -gt 0 ]]; then
 	PREFIX=$1
 fi
+
+if ! ls $PREFIX/SOR1_2018/Ejercicio_1/ | grep punto_a &> out; then
+#if [[ $? != 0 ]]; then #Si la operacion anterior no fue exitosa
+	echo "Path inválido" #Mensaje de error
+	exit 2 #codigo de error de usuario
+fi
 #Se crea el link simbolico entre el comando y el script
 echo "Creando comandos..."
-sudo ln -s  $PREFIX/SOR1_2018/Ejercicio_1/punto_a /usr/bin/instalado &> /dev/null
+ln -s  $PREFIX/SOR1_2018/Ejercicio_1/punto_a /usr/bin/instalado &> /dev/null
 if [[ $? == 0 ]]; then
 	echo "'instalado' creado"
 else
