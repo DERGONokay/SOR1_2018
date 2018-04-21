@@ -89,7 +89,7 @@ decidir () {
     echo $1;
     while true; do
         echo "desea ejecutar? (s/n)";
-            read respuesta;
+	read respuesta;
             case $respuesta in
                 [Nn]* ) break;;
                    [Ss]* ) eval $1
@@ -115,7 +115,8 @@ b_funcion () {
 }
 
 c_funcion () {
-          imprimir_encabezado "\tOpción c";
+          imprimir_encabezado "\tOpción c. Buscar archivo en ruta";
+	  decidir "./../Ejercicio_2/punto_b.sh"
           #completar       
 }
 
