@@ -53,6 +53,7 @@ imprimir_menu () {
     echo -e "\t\t\t c.  Buscar en directorio";
     echo -e "\t\t\t d.  Buscar en archivo";        
     echo -e "\t\t\t e.  Buscar cambio de estado";        
+    echo -e "\t\t\t f.  Actualizar repositorio";
     echo -e "\t\t\t q.  Salir";
     echo "";
     echo -e "Escriba la opción y presione ENTER";
@@ -121,7 +122,8 @@ c_funcion () {
 }
 
 d_funcion () {
-    imprimir_encabezado "\tOpción d";
+    imprimir_encabezado "\tOpción d. Buscar String en ruta";
+    decidir "./../Ejercicio_2/punto_c.sh"
     #completar
 }
 
@@ -129,6 +131,11 @@ d_funcion () {
 e_funcion () {
     imprimir_encabezado "\tOpción e";        
     #completar
+}
+
+f_funcion() {
+	imprimir_encabezado "\tOpcion f. Actualizar el repositorio"
+	decidir "./../Ejercicio_4/actualizarRepo.sh"	
 }
 
 
@@ -148,6 +155,7 @@ do
         c|C) c_funcion;;
         d|D) d_funcion;;
         e|E) e_funcion;;
+	f|F) f_funcion;;
         q|Q) break;;
         *) malaEleccion;;
     esac
