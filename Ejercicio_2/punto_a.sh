@@ -1,14 +1,14 @@
 #!/bin/bash
-NAME=$1
+read -p "Nombre del programa:" NAME 
 A=true
 #echo "Parametro = $*"
-if [[ $# -lt 1 ]]; then
-	echo 'Cantidad de parametros invalida'
-	exit 0
-fi
-if [[ $# -eq 1 ]]; then
+#if [[ $# -lt 1 ]]; then
+#	echo 'Cantidad de parametros invalida'
+#	exit 0
+#fi
+#if [[ $# -eq 1 ]]; then
     while $A; do
-	case $1 in
+	case NAME in
 	man | --help)
 		echo "Preguntenle a Damian como funciona, yo no se nada"
 		exit 0
@@ -18,7 +18,7 @@ if [[ $# -eq 1 ]]; then
 		;;
 	esac
     done
-fi
+#fi
 INSTALADO=`dpkg -l "*$NAME*" &> /dev/null`
 if dpkg -l "*$NAME*" &> /dev/null; then
 	echo 'Programa instalado'

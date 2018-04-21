@@ -3,7 +3,7 @@
 #Prueba de ANIMACION
 #------------------------------------------------------
 animacionCarga () {
-    cont=0
+    cont=2
     echo -n "Cargando opciones, espere "
     while [ $cont -lt 2 ]; do 
         for i in / - \\ '|'; do 
@@ -49,10 +49,10 @@ imprimir_menu () {
     echo -e "\t\t Opciones:";
     echo "";
     echo -e "\t\t\t a.  Ver estado del proyecto";
-    echo -e "\t\t\t b.  ";
-    echo -e "\t\t\t c.  ";
-    echo -e "\t\t\t d.  ";        
-    echo -e "\t\t\t e.  ";        
+    echo -e "\t\t\t b.  Buscar instalado";
+    echo -e "\t\t\t c.  Buscar en directorio";
+    echo -e "\t\t\t d.  Buscar en archivo";        
+    echo -e "\t\t\t e.  Buscar cambio de estado";        
     echo -e "\t\t\t q.  Salir";
     echo "";
     echo -e "Escriba la opción y presione ENTER";
@@ -108,8 +108,10 @@ a_funcion () {
 }
 
 b_funcion () {
-           imprimir_encabezado "\tOpción b";
-    #completar
+           imprimir_encabezado "\tOpción b. Buscar si un programa esta instalado";
+	   #sh ~/SOR1_2018/Ejercicio_2 punto_a
+    	   decidir "./../Ejercicio_2/punto_a.sh"
+	   #completar
 }
 
 c_funcion () {
