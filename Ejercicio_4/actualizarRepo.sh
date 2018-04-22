@@ -3,7 +3,7 @@ read -p "Ingrese el branch que desea actualizar: " RAMA
 read -p "Ingrese un mensaje para el commit: " MENSAJE
 
 #Chequeo si hay commit para hacer:
-estado=`git status | grep "Nothing to commit"`
+estado=`git status | grep "nothing to commit"`
 if [[ $estado -gt 0 ]]; then\
 	echo "El repositorio ya esta actualizado!"
 	exit 0
