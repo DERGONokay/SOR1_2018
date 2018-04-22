@@ -34,7 +34,12 @@ animacionCarga () {
 user=$(whoami)
 proyectoActual="/home/$user/SOR1_2018";
 proyectos="/home/$user/Documentos";
-
+#-----------------------------------------------------
+# CHEQUEAR ACTUALIZADO
+#-----------------------------------------------------
+chequear_actualizado(){
+	
+}
 #------------------------------------------------------
 # DISPLAY MENU
 #------------------------------------------------------
@@ -44,6 +49,7 @@ imprimir_menu () {
     echo ""
     echo -e "\t\t El proyecto actual es:";
     echo -e "\t\t $proyectoActual";
+    echo -e "\t\t ";chequear_actualizado
     
     echo -e "\t\t";
     echo -e "\t\t Opciones:";
