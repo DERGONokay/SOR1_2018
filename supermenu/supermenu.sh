@@ -54,6 +54,7 @@ imprimir_menu () {
     echo -e "\t\t\t d.  Buscar en archivo";        
     echo -e "\t\t\t e.  Buscar cambio de estado";        
     echo -e "\t\t\t f.  Actualizar repositorio";
+    echo -e "\t\t\t g.  Ver estado de un proceso"; 
     echo -e "\t\t\t q.  Salir";
     echo "";
     echo -e "Escriba la opción y presione ENTER";
@@ -138,6 +139,11 @@ f_funcion() {
 	decidir "./../Ejercicio_4/actualizarRepo.sh"	
 }
 
+g_function () {
+	imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
+	decidir "./../Ejercicio_2/punto_d.sh"
+}
+
 
 #------------------------------------------------------
 # LOGICA PRINCIPAL
@@ -156,6 +162,7 @@ do
         d|D) d_funcion;;
         e|E) e_funcion;;
 	f|F) f_funcion;;
+	g|G) g_funcion;;
         q|Q) break;;
         *) malaEleccion;;
     esac
