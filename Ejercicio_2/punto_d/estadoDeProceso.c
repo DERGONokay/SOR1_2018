@@ -9,7 +9,8 @@ int main() {
     fp = fopen("/tmp/proceso.log", "w+");
 
     //empezamos un ciclo infinito
-    int i_max = INT_MAX/100;
+    //int i_max = INT_MAX/100;
+    int i_max = 5;
     	while(1){
    	 //imprimir un mensaje para el usuario
    	 printf("Esperando...\n Presione cualquier tecla...");
