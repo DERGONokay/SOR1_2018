@@ -38,7 +38,13 @@ proyectos="/home/$user/Documentos";
 # CHEQUEAR ACTUALIZADO
 #-----------------------------------------------------
 chequear_actualizado(){
-	
+	git fetch &> /dev/null
+        git status | grep "Your branch is behind" &> /dev/null
+	if [[ $? -eq 0 ]]; then
+		echo "Branch desactualizada"
+	else
+		echo "Branch actualizada"
+	fi
 }
 #------------------------------------------------------
 # DISPLAY MENU
@@ -49,7 +55,7 @@ imprimir_menu () {
     echo ""
     echo -e "\t\t El proyecto actual es:";
     echo -e "\t\t $proyectoActual";
-    echo -e "\t\t ";chequear_actualizado
+    echo -e -n "\t\t ";chequear_actualizado
     
     echo -e "\t\t";
     echo -e "\t\t Opciones:";
