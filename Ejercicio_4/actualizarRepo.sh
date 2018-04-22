@@ -10,7 +10,7 @@ if [[ $estado -gt 0 ]]; then\
 fi
 #Verifico que el branch exista
 existe=`git branch | grep $RAMA`
-if [[ $existe -gt 0 ]]; then
+if [[ $? -gt 0 ]]; then
 	echo "La rama $RAMA no existe"
 	exit 2
 fi
