@@ -34,7 +34,18 @@ animacionCarga () {
 user=$(whoami)
 proyectoActual="/home/$user/SOR1_2018";
 proyectos="/home/$user/Documentos";
-
+#-----------------------------------------------------
+# CHEQUEAR ACTUALIZADO
+#-----------------------------------------------------
+chequear_actualizado(){
+	git fetch &> /dev/null
+        git status | grep "Your branch is behind" &> /dev/null
+	if [[ $? -eq 0 ]]; then
+		echo "Su rama esta desactualizada"
+	else
+		echo "Su rama esta actualizada"
+	fi
+}
 #------------------------------------------------------
 # DISPLAY MENU
 #------------------------------------------------------
@@ -44,6 +55,7 @@ imprimir_menu () {
     echo ""
     echo -e "\t\t El proyecto actual es:";
     echo -e "\t\t $proyectoActual";
+    echo -e -n "\t\t ";chequear_actualizado
     
     echo -e "\t\t";
     echo -e "\t\t Opciones:";
@@ -53,6 +65,9 @@ imprimir_menu () {
     echo -e "\t\t\t c.  Buscar en directorio";
     echo -e "\t\t\t d.  Buscar en archivo";        
     echo -e "\t\t\t e.  Buscar cambio de estado";        
+    echo -e "\t\t\t f.  Realizar push del REPO";
+    echo -e "\t\t\t g.  Ver estado de un proceso";
+    echo -e "\t\t\t h.  Actualizar REPO"; 
     echo -e "\t\t\t q.  Salir";
     echo "";
     echo -e "Escriba la opción y presione ENTER";
@@ -121,7 +136,8 @@ c_funcion () {
 }
 
 d_funcion () {
-    imprimir_encabezado "\tOpción d";
+    imprimir_encabezado "\tOpción d. Buscar String en ruta";
+    decidir "./../Ejercicio_2/punto_c.sh"
     #completar
 }
 
@@ -129,6 +145,24 @@ d_funcion () {
 e_funcion () {
     imprimir_encabezado "\tOpción e";        
     #completar
+}
+
+f_funcion() {
+	imprimir_encabezado "\tOpcion f. Realizar push del REPO"
+	decidir "./../Ejercicio_4/pushRepo.sh"	
+}
+
+g_function () {
+	imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
+	decidir "./../Ejercicio_2/punto_d.sh"
+}
+
+h_funcion() {
+	imprimir_encabezado "\tOpcion h. Realizar pull del REPO"
+	chequear_actualizado | grep "Su rama esta actualizada"
+	if [[ $? -gt 0 ]]; then
+		decidir "./../Ejercicio_4/pullRepo.sh"
+	fi
 }
 
 
@@ -148,6 +182,9 @@ do
         c|C) c_funcion;;
         d|D) d_funcion;;
         e|E) e_funcion;;
+	f|F) f_funcion;;
+	g|G) g_funcion;;
+	h|H) h_funcion;;
         q|Q) break;;
         *) malaEleccion;;
     esac
