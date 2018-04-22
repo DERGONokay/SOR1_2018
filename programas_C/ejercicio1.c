@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <pthread.h>
-#include <unistd.h> 
 #include <semaphore.h>
 
 sem_t s1;
