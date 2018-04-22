@@ -2,8 +2,6 @@
 
 read -p "Ingrese el proceso a filtrar: " proceso
 
-$proceso&
-
+$proceso
 PID=$!
-
 top | grep $PID
