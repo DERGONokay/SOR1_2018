@@ -81,10 +81,11 @@ int main ()
 		rc = pthread_create(&p4,NULL,t4,NULL);
 		rc = pthread_create(&p5,NULL,t5,NULL);
 	}
-	if (rc){
-	            printf("Error:unable to create thread, %d \n", rc);
-	            exit(-1);
-	       }
+	if (rc)
+	{
+		printf("Error:unable to create thread, %d \n", rc);
+	    exit(-1);
+	}
 	//pthread_mutex_destroy(&mi_mutex);
 //	printf("Saliendo\n");
 	pthread_exit(NULL);
