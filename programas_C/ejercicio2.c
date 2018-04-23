@@ -2,6 +2,7 @@
 #include <stdlib.h> 
 #include <pthread.h>
 #include <semaphore.h>
+//#include <unistd.h> //para usar sleep(tiempo dado)
 
 sem_t s1;
 sem_t s2;
@@ -15,6 +16,7 @@ void* t1 (void* parametro)
 	sem_wait(&s1);
 	printf("Ole Ole Ole\n");
 	sem_post(&s4);
+
 	pthread_exit(NULL);
 }
 void* t2 (void* parametro)
@@ -44,7 +46,9 @@ void* t4 (void* parametro)
 void* t5 (void* parametro)
 {
 	sem_wait(&s6);
-	printf("Es un sentimiento, no puedo parar\n");
+	printf("Es un sentimiento, no puedo parar\n\n\n");
+	sem_post(&s1);
+	sem_post(&s2);
 	pthread_exit(NULL);
 }
 
@@ -72,6 +76,7 @@ int main ()
 	{
 		rc = pthread_create(&p1,NULL,t1,NULL);
 		rc = pthread_create(&p2,NULL,t2,NULL);
+		rc = pthread_create(&p1,NULL,t1,NULL);
 		rc = pthread_create(&p3,NULL,t3,NULL);
 		rc = pthread_create(&p4,NULL,t4,NULL);
 		rc = pthread_create(&p5,NULL,t5,NULL);
