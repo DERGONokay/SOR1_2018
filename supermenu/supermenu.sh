@@ -152,7 +152,7 @@ f_funcion() {
 	decidir "./../Ejercicio_4/pushRepo.sh"	
 }
 
-g_function () {
+g_funcion () {
 	imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
 	decidir "./../Ejercicio_2/punto_d.sh"
 }
@@ -182,9 +182,9 @@ do
         c|C) c_funcion;;
         d|D) d_funcion;;
         e|E) e_funcion;;
-	f|F) f_funcion;;
-	g|G) g_funcion;;
-	h|H) h_funcion;;
+    	f|F) f_funcion;;
+    	g|G) g_funcion;;
+    	h|H) h_funcion;;
         q|Q) break;;
         *) malaEleccion;;
     esac
