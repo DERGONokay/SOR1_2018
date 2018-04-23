@@ -14,7 +14,7 @@ sem_t s6;
 void* t1 (void* parametro)
 {
 	sem_wait(&s1);
-	printf("Ole Ole Ole\n");
+	printf("\nOle Ole Ole\n");
 	sem_post(&s4);
 
 	pthread_exit(NULL);
