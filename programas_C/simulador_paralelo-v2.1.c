@@ -208,6 +208,7 @@ void jugar_partido (int equipo_1, int equipo_2, int instancia, char* grupo_data[
 
 void* jugar_grupo (void* indice)
 {
+  //Casteo el apuntador a un int
   int* pointer = indice;
   int grupo = *pointer;
   free(indice);
@@ -311,27 +312,18 @@ void jugar_grupos ()
 {
   printf("***************************************** \n");
   printf("Jugando grupos\n");
+  //Creo un "arreglo" para los threads
   pthread_t *threads;
   threads = (pthread_t*) calloc(sizeof(pthread_t)*CANTIDAD_GRUPOS,sizeof(pthread_t));
   int i;
   for( i=0; i < CANTIDAD_GRUPOS; i++ )
   {
+    //Creo un apuntador al indice
     int *indice = malloc(sizeof(int));
     *indice = i;
     printf("Creando un nuevo thread!\n");
     pthread_create(&(threads[i]) ,NULL,&jugar_grupo,indice);  
   }
-  /*
-  pthread_t T0,T1,T2,T3,T4,T5,T6,T7;
-  pthread_create(&T0,NULL,jugar_grupo(0),NULL);
-  pthread_create(&T1,NULL,jugar_grupo(1),NULL);
-  pthread_create(&T2,NULL,jugar_grupo(2),NULL);
-  pthread_create(&T3,NULL,jugar_grupo(3),NULL);
-  pthread_create(&T4,NULL,jugar_grupo(4),NULL);
-  pthread_create(&T5,NULL,jugar_grupo(5),NULL);
-  pthread_create(&T6,NULL,jugar_grupo(6),NULL);
-  pthread_create(&T7,NULL,jugar_grupo(7),NULL);
-  */
 }
 
 
