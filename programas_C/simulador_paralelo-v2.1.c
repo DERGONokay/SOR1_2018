@@ -321,7 +321,6 @@ void jugar_grupos ()
     //Creo un apuntador al indice
     int *indice = malloc(sizeof(int));
     *indice = i;
-    printf("Creando un nuevo thread!\n");
     pthread_create(&(threads[i]) ,NULL,&jugar_grupo,indice);  
   }
 }
@@ -334,7 +333,7 @@ char* winer_octavos[] = {"Wp49", "Wp50", "Wp51", "Wp52", "Wp53", "Wp54", "Wp55",
 
 
 
-void jugar_partido_winners(char * nombre_equipo_1, char * nombre_equipo_2, int index_partido, char* data_winners[]){
+void* jugar_partido_winners(char * nombre_equipo_1, char * nombre_equipo_2, int index_partido, char* data_winners[]){
   printf("Jugando partido entre %s y %s \n", nombre_equipo_1, nombre_equipo_2);
   int goles_equipo_1;
   int goles_equipo_2;
@@ -378,7 +377,86 @@ int obtener_segundo(int grupo_puntos[][8]){
   }
   return index_segundo;
 }
+void* jugar_partido_octavos(void* indice)
+{
+  int* pointer = indice;
+  int partido = *pointer;
+  free(indice);
+  int index_1;
+  char * nombre_equipo_1;
+  int index_2;
+  char * nombre_equipo_2;
+  switch(partido)
+  {
+    case 0:
+          index_1=obtener_primero(grupo_A_puntos);
+          nombre_equipo_1=grupo_A[index_1];
+          index_2=obtener_segundo(grupo_B_puntos);
+          nombre_equipo_2=grupo_B[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 0, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    case 1:
+          index_1=obtener_primero(grupo_C_puntos);
+          nombre_equipo_1=grupo_C[index_1];
+          index_2=obtener_segundo(grupo_D_puntos);
+          nombre_equipo_2=grupo_D[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 1, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    case 2:
+          index_1=obtener_primero(grupo_B_puntos);
+          nombre_equipo_1=grupo_B[index_1];
+          index_2=obtener_segundo(grupo_A_puntos);
+          nombre_equipo_2=grupo_A[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 2, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    case 3:
+          index_1=obtener_primero(grupo_D_puntos);
+          nombre_equipo_1=grupo_D[index_1];
+          index_2=obtener_segundo(grupo_C_puntos);
+          nombre_equipo_2=grupo_C[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 3, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    case 4:
+          index_1=obtener_primero(grupo_E_puntos);
+          nombre_equipo_1=grupo_E[index_1];
+          index_2=obtener_segundo(grupo_F_puntos);
+          nombre_equipo_2=grupo_F[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 4, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    case 5:
+          index_1=obtener_primero(grupo_G_puntos);
+          nombre_equipo_1=grupo_G[index_1];
+          index_2=obtener_segundo(grupo_H_puntos);
+          nombre_equipo_2=grupo_H[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 5, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    case 6:
+          index_1=obtener_primero(grupo_F_puntos);
+          nombre_equipo_1=grupo_F[index_1];
+          index_2=obtener_segundo(grupo_E_puntos);
+          nombre_equipo_2=grupo_E[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 6, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    case 7:
+          index_1=obtener_primero(grupo_H_puntos);
+          nombre_equipo_1=grupo_H[index_1];
+          index_2=obtener_segundo(grupo_G_puntos);
+          nombre_equipo_2=grupo_G[index_2];
+          jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 7, winer_octavos);
+          sem_post(&SEM_OCTAVOS);
+          break;
+    default:
+          printf("Partido de octavos invalido\n");
 
+  }
+}
 
 void jugar_octavos ()
 {
@@ -386,93 +464,73 @@ void jugar_octavos ()
   {
     sem_wait(&SEM_GRUPOS);
   }
-  int index_1;
-  char * nombre_equipo_1;
-  int index_2;
-  char * nombre_equipo_2;
   printf("***************************************** \n");
   printf("Jugando octavos \n");
 
-
-  //partido 49: A1 vs B2
-  index_1=obtener_primero(grupo_A_puntos);
-  nombre_equipo_1=grupo_A[index_1];
-  index_2=obtener_segundo(grupo_B_puntos);
-  nombre_equipo_2=grupo_B[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 0, winer_octavos);
- 
-  //partido 50: C1 vs D2
-  index_1=obtener_primero(grupo_C_puntos);
-  nombre_equipo_1=grupo_C[index_1];
-  index_2=obtener_segundo(grupo_D_puntos);
-  nombre_equipo_2=grupo_D[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 1, winer_octavos);
-
-
-  //partido 51: B1 vs A2
-  index_1=obtener_primero(grupo_B_puntos);
-  nombre_equipo_1=grupo_B[index_1];
-  index_2=obtener_segundo(grupo_A_puntos);
-  nombre_equipo_2=grupo_A[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 2, winer_octavos);
-
-
-  //partido 52: D1 vs C2
-  index_1=obtener_primero(grupo_D_puntos);
-  nombre_equipo_1=grupo_D[index_1];
-  index_2=obtener_segundo(grupo_C_puntos);
-  nombre_equipo_2=grupo_C[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 3, winer_octavos);
-
-
-  //partido 53: E1 vs F2
-  index_1=obtener_primero(grupo_E_puntos);
-  nombre_equipo_1=grupo_E[index_1];
-  index_2=obtener_segundo(grupo_F_puntos);
-  nombre_equipo_2=grupo_F[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 4, winer_octavos);
-
-
-  //partido 54: G1 vs H2
-  index_1=obtener_primero(grupo_G_puntos);
-  nombre_equipo_1=grupo_G[index_1];
-  index_2=obtener_segundo(grupo_H_puntos);
-  nombre_equipo_2=grupo_H[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 5, winer_octavos);
-
-
-  //partido 55: F1 vs E2
-  index_1=obtener_primero(grupo_F_puntos);
-  nombre_equipo_1=grupo_F[index_1];
-  index_2=obtener_segundo(grupo_E_puntos);
-  nombre_equipo_2=grupo_E[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 6, winer_octavos);
-
-
-  //partido 56: H1 vs G2
-  index_1=obtener_primero(grupo_H_puntos);
-  nombre_equipo_1=grupo_H[index_1];
-  index_2=obtener_segundo(grupo_G_puntos);
-  nombre_equipo_2=grupo_G[index_2];
-  jugar_partido_winners(nombre_equipo_1, nombre_equipo_2, 7, winer_octavos);
-
-
+  pthread_t *threads;
+  threads = (pthread_t*) calloc(sizeof(pthread_t)*CANTIDAD_GRUPOS,sizeof(pthread_t));
+  int i;
+  for( i=0; i < CANTIDAD_GRUPOS; i++ )
+  {
+    //Creo un apuntador al indice
+    int *indice = malloc(sizeof(int));
+    *indice = i;
+    pthread_create(&(threads[i]) ,NULL,&jugar_partido_octavos,indice);  
+  }
 }
 
 
 char* winer_cuartos[] = {"Wp57", "Wp58", "Wp59", "Wp60"};
-
+void* jugar_partido_cuartos(void* indice)
+{
+  int* pointer = indice;
+  int partido = *pointer;
+  free(indice);
+  switch(partido)
+  {
+    case 0:
+      jugar_partido_winners(winer_octavos[0], winer_octavos[1], 0, winer_cuartos);
+      sem_post(&SEM_CUARTOS);
+      pthread_exit(NULL);
+      break;
+    case 1:
+      jugar_partido_winners(winer_octavos[4], winer_octavos[5], 1, winer_cuartos);
+      sem_post(&SEM_CUARTOS);
+      pthread_exit(NULL);
+      break;
+    case 2:
+      jugar_partido_winners(winer_octavos[2], winer_octavos[3], 2, winer_cuartos);
+      sem_post(&SEM_CUARTOS);
+      pthread_exit(NULL);
+      break;
+    case 3:
+      jugar_partido_winners(winer_octavos[6], winer_octavos[7], 3, winer_cuartos);
+      sem_post(&SEM_CUARTOS);
+      pthread_exit(NULL);
+      break;
+  }
+}
 
 void jugar_cuartos ()
 {
+  for (int i = 0; i < 8 ; ++i)
+  {
+    sem_wait(&SEM_OCTAVOS);
+  }
   printf("***************************************** \n");
   printf("Jugando cuartos \n");
-  int index_1;
-  char * nombre_equipo_1;
-  int index_2;
-  char * nombre_equipo_2;
 
-
+  pthread_t *threads;
+  threads = (pthread_t*) calloc(sizeof(pthread_t)*4,sizeof(pthread_t));
+  int i;
+  for( i=0; i < 4; i++ )
+  {
+    //Creo un apuntador al indice
+    int *indice = malloc(sizeof(int));
+    *indice = i;
+    pthread_create(&(threads[i]) ,NULL,&jugar_partido_cuartos,indice);  
+  }
+/*
   //partido 57: Wp49 vs Wp50
   jugar_partido_winners(winer_octavos[0], winer_octavos[1], 0, winer_cuartos);    
     
@@ -486,7 +544,7 @@ void jugar_cuartos ()
 
   //partido 60: Wp55 vs Wp56
   jugar_partido_winners(winer_octavos[6], winer_octavos[7], 3, winer_cuartos);
-
+*/
 
 }
 
