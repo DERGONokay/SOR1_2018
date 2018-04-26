@@ -65,10 +65,9 @@ imprimir_menu () {
     echo -e "\t\t\t b.  Buscar instalado";
     echo -e "\t\t\t c.  Buscar en directorio";
     echo -e "\t\t\t d.  Buscar en archivo";        
-    echo -e "\t\t\t e.  Buscar cambio de estado";        
+    echo -e "\t\t\t e.  Ver estado de un proceso";       
     echo -e "\t\t\t f.  Realizar push del REPO";
-    echo -e "\t\t\t g.  Ver estado de un proceso";
-    echo -e "\t\t\t h.  Actualizar REPO"; 
+    echo -e "\t\t\t g.  Actualizar REPO"; 
     echo -e "\t\t\t q.  Salir";
     echo "";
     echo -e "Escriba la opción y presione ENTER";
