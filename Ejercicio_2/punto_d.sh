@@ -1,5 +1,5 @@
 #!/bin/bash
-./bucle.sh &  #Se ejecuta en segundo plano
+./../Ejercicio_2/bucle.sh &  #Se ejecuta en segundo plano
 top | grep $! #Se filtra el id del proceso en top
 
 
