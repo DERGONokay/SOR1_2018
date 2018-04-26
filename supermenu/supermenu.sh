@@ -66,9 +66,8 @@ imprimir_menu () {
     echo -e "\t\t\t c.  Buscar en directorio";
     echo -e "\t\t\t d.  Buscar en archivo";        
     echo -e "\t\t\t e.  Buscar cambio de estado";        
-    echo -e "\t\t\t f.  Realizar push del REPO";
-    echo -e "\t\t\t g.  Ver estado de un proceso";
-    echo -e "\t\t\t h.  Actualizar REPO"; 
+    echo -e "\t\t\t f.  Realizar push del repo";
+    echo -e "\t\t\t g.  Realizar pull del repo";
     echo -e "\t\t\t q.  Salir";
     echo "";
     echo -e "Escriba la opción y presione ENTER";
@@ -143,22 +142,17 @@ d_funcion () {
 }
 
 
-e_funcion () {
-    imprimir_encabezado "\tOpción e";        
-    #completar
-}
-
 f_funcion() {
 	imprimir_encabezado "\tOpcion f. Realizar push del REPO"
 	decidir "$proyectoActual/Ejercicio_4/pushRepo.sh"	
 }
 
-g_funcion () {
+e_funcion () {
 	imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
 	decidir "$proyectoActual/Ejercicio_2/punto_d.sh"
 }
 
-h_funcion() {
+g_funcion() {
 	imprimir_encabezado "\tOpcion h. Realizar pull del REPO"
 	chequear_actualizado | grep "Su rama esta actualizada"
 	if [[ $? -gt 0 ]]; then
@@ -183,9 +177,8 @@ do
         c|C) c_funcion;;
         d|D) d_funcion;;
         e|E) e_funcion;;
-	    f|F) f_funcion;;
-	    g|G) g_funcion;;
-	    h|H) h_funcion;;
+	f|F) f_funcion;;
+	g|G) g_funcion;;
         q|Q) break;;
         *) malaEleccion;;
     esac
