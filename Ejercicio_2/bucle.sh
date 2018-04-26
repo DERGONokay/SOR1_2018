@@ -1,5 +1,5 @@
 #!/bin/bash
-tiempo=5
+tiempo=4
 cont=0
 clear
 while [[ $cont -lt $tiempo ]];do
