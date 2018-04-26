@@ -143,7 +143,8 @@ d_funcion () {
 
 
 e_funcion () {
-    imprimir_encabezado "\tOpción e";        
+    imprimir_encabezado "\tOpción e";
+    decidir "./../Ejercicio_2/punto_d.sh"       
     #completar
 }
 
