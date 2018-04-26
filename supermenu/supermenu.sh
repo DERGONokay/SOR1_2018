@@ -3,7 +3,7 @@
 #Prueba de ANIMACION
 #------------------------------------------------------
 animacionCarga () {
-    cont=2
+    cont=0
     echo -n "Cargando opciones, espere "
     while [ $cont -lt 2 ]; do 
         for i in / - \\ '|'; do 
