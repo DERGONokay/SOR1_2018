@@ -138,35 +138,28 @@ d_funcion () {
     decidir "$proyectoActual/Ejercicio_2/punto_c.sh"
 }
 
-
-<<<<<<< HEAD
-=======
 e_funcion () {
     imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
     decidir "$proyectoActual/Ejercicio_2/punto_d.sh"
 }
 
->>>>>>> luciano
 f_funcion() {
 	imprimir_encabezado "\tOpcion f. Realizar push del REPO"
 	decidir "$proyectoActual/Ejercicio_4/pushRepo.sh"	
 }
 
-<<<<<<< HEAD
 e_funcion () {
 	imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
 	decidir "$proyectoActual/Ejercicio_2/punto_d.sh"
 }
 
-g_funcion() {
-=======
+
 g_funcion () {
->>>>>>> luciano
 	imprimir_encabezado "\tOpcion h. Realizar pull del REPO"
-    chequear_actualizado | grep "Su rama esta actualizada"
-    if [[ $? -gt 0 ]]; then
-        decidir "$proyectoActual/Ejercicio_4/pullRepo.sh"
-    fi
+    	chequear_actualizado | grep "Su rama esta actualizada"
+    	if [[ $? -gt 0 ]]; then
+        	decidir "$proyectoActual/Ejercicio_4/pullRepo.sh"
+   	 fi
 }
 
 #------------------------------------------------------
@@ -185,13 +178,8 @@ do
         c|C) c_funcion;;
         d|D) d_funcion;;
         e|E) e_funcion;;
-<<<<<<< HEAD
 	f|F) f_funcion;;
 	g|G) g_funcion;;
-=======
-	    f|F) f_funcion;;
-	    g|G) g_funcion;;
->>>>>>> luciano
         q|Q) break;;
         *) malaEleccion;;
     esac
