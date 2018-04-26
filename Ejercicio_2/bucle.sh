@@ -1,5 +1,6 @@
 #!/bin/bash
 tiempo=6
+cont=0
 clear
 while [[ $cont -lt $tiempo ]];do
 	##############################
