@@ -316,10 +316,10 @@ void jugar_grupos ()
   pthread_t *threads;
   threads = (pthread_t*) calloc(sizeof(pthread_t)*CANTIDAD_GRUPOS,sizeof(pthread_t));
   int i;
-  for( i=0; i < CANTIDAD_GRUPOS; i++ )
+  for(i=0; i < CANTIDAD_GRUPOS; i++)
   {
     //Creo un apuntador al indice
-    int *indice = malloc(sizeof(int));
+     int *indice = malloc(sizeof(int));
     *indice = i;
     pthread_create(&(threads[i]) ,NULL,&jugar_grupo,indice);  
   }

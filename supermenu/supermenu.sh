@@ -3,7 +3,7 @@
 #Prueba de ANIMACION
 #------------------------------------------------------
 animacionCarga () {
-    cont=2
+    cont=0
     echo -n "Cargando opciones, espere "
     while [ $cont -lt 2 ]; do 
         for i in / - \\ '|'; do 
@@ -66,9 +66,8 @@ imprimir_menu () {
     echo -e "\t\t\t c.  Buscar en directorio";
     echo -e "\t\t\t d.  Buscar en archivo";        
     echo -e "\t\t\t e.  Buscar cambio de estado";        
-    echo -e "\t\t\t f.  Realizar push del REPO";
-    echo -e "\t\t\t g.  Ver estado de un proceso";
-    echo -e "\t\t\t h.  Actualizar REPO"; 
+    echo -e "\t\t\t f.  Realizar push del repo";
+    echo -e "\t\t\t g.  Realizar pull del repo";
     echo -e "\t\t\t q.  Salir";
     echo "";
     echo -e "Escriba la opción y presione ENTER";
@@ -108,7 +107,7 @@ decidir () {
 	read respuesta;
             case $respuesta in
                 [Nn]* ) break;;
-                   [Ss]* ) eval $1
+                [Ss]* ) eval $1
                 break;;
                 * ) echo "Por favor tipear S/s ó N/n.";;
             esac
@@ -143,22 +142,17 @@ d_funcion () {
 }
 
 
-e_funcion () {
-    imprimir_encabezado "\tOpción e";        
-    #completar
-}
-
 f_funcion() {
 	imprimir_encabezado "\tOpcion f. Realizar push del REPO"
 	decidir "$proyectoActual/Ejercicio_4/pushRepo.sh"	
 }
 
-g_function () {
+e_funcion () {
 	imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
 	decidir "$proyectoActual/Ejercicio_2/punto_d.sh"
 }
 
-h_funcion() {
+g_funcion() {
 	imprimir_encabezado "\tOpcion h. Realizar pull del REPO"
 	chequear_actualizado | grep "Su rama esta actualizada"
 	if [[ $? -gt 0 ]]; then
@@ -185,7 +179,6 @@ do
         e|E) e_funcion;;
 	f|F) f_funcion;;
 	g|G) g_funcion;;
-	h|H) h_funcion;;
         q|Q) break;;
         *) malaEleccion;;
     esac
