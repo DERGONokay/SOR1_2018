@@ -10,7 +10,8 @@ while [[ $cont -lt $tiempo ]];do
 	echo "ejecutando------>R"
 	for(( i=0; i<100000;i++ ));do
 		echo $i >> temporal.txt
-	done	
+	done
+	rm temporal.txt	
 	##############################
 	echo "durmiendo------->S"
 	sleep 3
