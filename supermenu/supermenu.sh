@@ -38,8 +38,9 @@ proyectos="/home/$user/Documentos";
 # CHEQUEAR ACTUALIZADO
 #-----------------------------------------------------
 chequear_actualizado(){
+    cd $proyectoActual
 	git fetch &> /dev/null
-        git status | grep "Your branch is behind" &> /dev/null
+    git status | grep "Your branch is behind" &> /dev/null
 	if [[ $? -eq 0 ]]; then
 		echo "Su rama esta desactualizada"
 	else
@@ -125,19 +126,19 @@ a_funcion () {
 b_funcion () {
            imprimir_encabezado "\tOpción b. Buscar si un programa esta instalado";
 	   #sh ~/SOR1_2018/Ejercicio_2 punto_a
-    	   decidir "./../Ejercicio_2/punto_a.sh"
+    	   decidir "$proyectoActual/Ejercicio_2/punto_a.sh"
 	   #completar
 }
 
 c_funcion () {
           imprimir_encabezado "\tOpción c. Buscar archivo en ruta";
-	  decidir "./../Ejercicio_2/punto_b.sh"
+	  decidir "$proyectoActual/Ejercicio_2/punto_b.sh"
           #completar       
 }
 
 d_funcion () {
     imprimir_encabezado "\tOpción d. Buscar String en ruta";
-    decidir "./../Ejercicio_2/punto_c.sh"
+    decidir "$proyectoActual/Ejercicio_2/punto_c.sh"
     #completar
 }
 
@@ -149,19 +150,19 @@ e_funcion () {
 
 f_funcion() {
 	imprimir_encabezado "\tOpcion f. Realizar push del REPO"
-	decidir "./../Ejercicio_4/pushRepo.sh"	
+	decidir "$proyectoActual/Ejercicio_4/pushRepo.sh"	
 }
 
 g_function () {
 	imprimir_encabezado "\tOpcion g. Ver estado de un proceso"
-	decidir "./../Ejercicio_2/punto_d.sh"
+	decidir "$proyectoActual/Ejercicio_2/punto_d.sh"
 }
 
 h_funcion() {
 	imprimir_encabezado "\tOpcion h. Realizar pull del REPO"
 	chequear_actualizado | grep "Su rama esta actualizada"
 	if [[ $? -gt 0 ]]; then
-		decidir "./../Ejercicio_4/pullRepo.sh"
+		decidir "$proyectoActual/Ejercicio_4/pullRepo.sh"
 	fi
 }
 
