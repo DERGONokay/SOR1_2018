@@ -460,6 +460,7 @@ void* jugar_partido_octavos(void* indice)
 
 void jugar_octavos ()
 {
+  //Espero a que termine la fase de grupos
   for (int i = 0; i < CANTIDAD_GRUPOS; ++i)
   {
     sem_wait(&SEM_GRUPOS);
@@ -508,11 +509,14 @@ void* jugar_partido_cuartos(void* indice)
       sem_post(&SEM_CUARTOS);
       pthread_exit(NULL);
       break;
+    default:
+      printf("Cuartos de final invalido\n");
   }
 }
 
 void jugar_cuartos ()
 {
+  //Espero a que terminen los octavos
   for (int i = 0; i < 8 ; ++i)
   {
     sem_wait(&SEM_OCTAVOS);
@@ -530,49 +534,60 @@ void jugar_cuartos ()
     *indice = i;
     pthread_create(&(threads[i]) ,NULL,&jugar_partido_cuartos,indice);  
   }
-/*
-  //partido 57: Wp49 vs Wp50
-  jugar_partido_winners(winer_octavos[0], winer_octavos[1], 0, winer_cuartos);    
-    
-  //partido 58: Wp53 vs Wp54
-  jugar_partido_winners(winer_octavos[4], winer_octavos[5], 1, winer_cuartos);
-
-
-  //partido 59: Wp51 vs Wp52
-  jugar_partido_winners(winer_octavos[2], winer_octavos[3], 2, winer_cuartos);
-
-
-  //partido 60: Wp55 vs Wp56
-  jugar_partido_winners(winer_octavos[6], winer_octavos[7], 3, winer_cuartos);
-*/
-
 }
-
-
-
 
 char* winer_semis[] = {"Wp61", "Wp62"};
 char* champion[] = {"Wfinal"};
 
-
+void* jugar_partido_semis(void* indice)
+{
+  int* pointer = indice;
+  int partido = *pointer;
+  free(indice);
+  switch(partido)
+  {
+    case 0:
+      jugar_partido_winners(winer_cuartos[0], winer_cuartos[1], 0, winer_semis);
+      sem_post(&SEM_SEMI);
+      pthread_exit(NULL);
+      break;
+    case 1:
+      jugar_partido_winners(winer_cuartos[2], winer_cuartos[3], 1, winer_semis);
+      sem_post(&SEM_SEMI);
+      pthread_exit(NULL);
+      break;
+    default:
+      printf("Semifinal no válida\n");
+  }
+}
 void jugar_semis ()
 {
+  //espero a que terminen los cuartos
+  for (int i = 0; i < 4; ++i)
+  {
+    sem_wait(&SEM_CUARTOS);
+  }
   printf("***************************************** \n");
   printf("Jugando semis \n");
-  //partido 61: Wp57 vs Wp58
-  jugar_partido_winners(winer_cuartos[0], winer_cuartos[1], 0, winer_semis);
-
-
- 
-  //partido 62: Wp59 vs Wp60
-  jugar_partido_winners(winer_cuartos[2], winer_cuartos[3], 1, winer_semis);
-
-
+  //Reservo memoria para los threads
+  pthread_t *threads;
+  threads = (pthread_t*) calloc(sizeof(pthread_t)*2,sizeof(pthread_t));
+  int i;
+  for( i=0; i < 2; i++ )
+  {
+    //Creo un apuntador al indice
+    int *indice = malloc(sizeof(int));
+    *indice = i;
+    pthread_create(&(threads[i]) ,NULL,&jugar_partido_semis,indice);  
+  }
 }
-
-
 void jugar_final ()
 {
+  //Espero a que terminen las semis
+  for (int i = 0; i < 2; ++i)
+  {
+    sem_wait(&SEM_SEMI);
+  }
   printf("***************************************** \n");
  
   printf("Jugando final \n");
@@ -582,10 +597,6 @@ void jugar_final ()
   printf("El nuevo campeon del mundo es %s \n", champion[0]);
   printf("***************************************** \n");
 }
-
-
-
-
 int main ()
 {
   //Inicializo los semaforos
@@ -610,5 +621,5 @@ int main ()
 }
 
 
-//Para compilar:   gcc simulador.c -o simulador
-//Para ejecutar:   ./simulador
+//Para compilar:   gcc simulador_paralelo-v2.1.c -o compilados/simulador_paralelo-v2.1 -pthread
+//Para ejecutar:   ./compilados/simulador_paralelo-v2.1 || ./simulador_paralelo-v2
